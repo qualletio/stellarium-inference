@@ -52,9 +52,9 @@ export function sonnet(baseUrl: string): StellariumResource {
         },
         paymentManifest: {
           // $2 per million tokens
-          inputCostMicroUsdcPerMillionTokens: 2000000,
+          inputCostMicroUsdcPerMillionTokens: 2500000,
           // $10 per million tokens
-          outputCostMicroUsdcPerMillionTokens: 10000000,
+          outputCostMicroUsdcPerMillionTokens: 15000000,
           recipientAddress: process.env.CLAUDE_SONNET_PAYMENT_ADDRESS!,
         },
       },

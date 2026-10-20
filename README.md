@@ -1,6 +1,11 @@
 # stellarium-inference
 
-Stellarium Resources for routing AI inference.
+Stellarium-hosted model router for AI inference. No API Key needed. Pay in USDC.
+
+Supported Models:
+
+- Claude Sonnet
+- More coming soon.
 
 ## Modules
 
@@ -12,7 +17,7 @@ Stellarium Resources for routing AI inference.
 request ClaudeRequest {
 
     const sonnet: sh.stellarium.inference.claude.Sonnet
-    const response = sonnet.message("Hello, what is your name?", maxTokens: 2000)
+    const response = sonnet.message(prompt: "Hello, what is your name?", maxTokens: 2000)
 
     return response.value
 }

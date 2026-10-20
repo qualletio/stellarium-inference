@@ -1,4 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { ResourceFunctionCallParameter } from "requestscript";
 import type { StellariumResource } from "stellarium-ts";
 
 export function sonnet(baseUrl: string): StellariumResource {
@@ -9,7 +10,7 @@ export function sonnet(baseUrl: string): StellariumResource {
     path: "sh.stellarium.inference.claude",
     name: "Sonnet",
     description: "A collection of functions for Claude Sonnet 5.5",
-    website: "https://github.com/qualletio/stellarium-inference-claude",
+    website: "https://github.com/qualletio/stellarium-inference",
     functions: [
       {
         name: "message",
@@ -50,11 +51,23 @@ export function sonnet(baseUrl: string): StellariumResource {
 
           return { value: responseText, usage: { inputTokens: message.usage.input_tokens, outputTokens: message.usage.output_tokens } };
         },
+        estimateInputTokens: async (args: ResourceFunctionCallParameter[]) => {
+          const prompt = args.find((arg) => arg.name === "prompt")?.value as string;
+
+          const client = new Anthropic();
+
+          const messageTokensCount = await client.messages.countTokens({
+            messages: [{ content: prompt, role: "user" }],
+            model: "claude-sonnet-5-5"
+          });
+
+          return messageTokensCount.input_tokens;
+        },
         paymentManifest: {
-          // $2 per million tokens
+          // $2.50 per million tokens
           inputCostMicroUsdcPerMillionTokens: 2500000,
-          // $10 per million tokens
-          outputCostMicroUsdcPerMillionTokens: 15000000,
+          // $10.50 per million tokens
+          outputCostMicroUsdcPerMillionTokens: 10500000,
           recipientAddress: process.env.CLAUDE_SONNET_PAYMENT_ADDRESS!,
         },
       },

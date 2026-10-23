@@ -65,10 +65,9 @@ export function sonnet(baseUrl: string): StellariumResource {
         },
         paymentManifest: {
           // $2.50 per million tokens
-          inputCostMicroUsdcPerMillionTokens: 2500000,
+          inputCostMicroUsdPerMillionTokens: 2500000,
           // $10.50 per million tokens
-          outputCostMicroUsdcPerMillionTokens: 10500000,
-          recipientAddress: process.env.CLAUDE_SONNET_PAYMENT_ADDRESS!,
+          outputCostMicroUsdPerMillionTokens: 10500000,
         },
       },
     ],

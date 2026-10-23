@@ -1,6 +1,6 @@
 # stellarium-inference
 
-Stellarium-hosted model router for AI inference. No API Key needed. Pay in USDC.
+Stellarium-hosted model router for AI inference. No API Key needed. Pay per token, priced in USD.
 
 Supported Models:
 

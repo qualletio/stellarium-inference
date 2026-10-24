@@ -21,8 +21,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(@opentelemetry/api@1.10.0)(sqlite3@6.0.1)
       stellarium-ts:
-        specifier: ^0.17.0
-        version: 0.17.0(@opentelemetry/api@1.10.0)
+        specifier: ^0.19.0
+        version: 0.19.0(@opentelemetry/api@1.10.0)
     devDependencies:
       '@types/node':
         specifier: ^26.6.5
@@ -649,6 +649,9 @@ packages:
     resolution: {integrity: sha512-FFUtZMpoZ8RqHS3XeXEmHWLA4thH+ZxCv2lOiPIn1Xc7CxrqhWzNSDzD+/chS/zbYezmiwWLdQC09JdQKmthOw==}
     engines: {node: '>=20'}
 
+  jose@6.1.0:
+    resolution: {integrity: sha512-TTQJyoEoKcC1lscpVDCSsVgYzUDg/0Bt3WE//WiTPK6uOCQC2KZS4MpugbMWt/zyjkopgZoXhZuCi00gLudfUA==}
+
   json-schema-ref-resolver@3.0.1:
     resolution: {integrity: sha512-w+HwgljXpVwZ3IidoUR1qPZxSOQ+NRQWuVe6a5pe8XbHsNZE4UAwVPUvzZagn7yBKbJtt6UJnRFYbNTRPZI45Q==}
 
@@ -865,6 +868,11 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
+  requestscript@1.3.0:
+    resolution: {integrity: sha512-mPLfuuFpbjIxsyrDrS3EeGT09Ez7zppB18KGO0s0seMgbKmwUHTTQQ47BeTXrbPDA8bM3WHYDnWm4rOzX8sEUA==}
+    engines: {node: '>=20'}
+    hasBin: true
+
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
@@ -963,8 +971,8 @@ packages:
     resolution: {integrity: sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==}
     engines: {node: '>= 0.8'}
 
-  stellarium-ts@0.17.0:
-    resolution: {integrity: sha512-ur8CrSDZcwfxxKQ+Vfs4gWu5StW3tf1dn4sDtUJRkRiYRI943bY+W2B0uZMGuzjqrm5rE/5HPBRV/7/xKqdXCg==}
+  stellarium-ts@0.19.0:
+    resolution: {integrity: sha512-1KiLxf90N01TULrLLcZ7NKs9YQ7gILCnzZ2tFXLw2etv1mrdUbuJKHTC0wIS9w6e5qs94CT8ty7vX3xk/U0qNA==}
     engines: {node: '>=20'}
 
   string_decoder@1.3.0:
@@ -1483,6 +1491,8 @@ snapshots:
   isexe@4.0.0:
     optional: true
 
+  jose@6.1.0: {}
+
   json-schema-ref-resolver@3.0.1:
     dependencies:
       dequal: 2.0.3
@@ -1758,6 +1768,61 @@ snapshots:
       - valibot
       - zod
 
+  requestscript@1.3.0(@opentelemetry/api@1.10.0)(sqlite3@6.0.1):
+    dependencies:
+      drizzle-orm: 1.0.0-rc.4(@opentelemetry/api@1.10.0)(pg@8.23.1)(sqlite3@6.0.1)
+      express: 5.3.0
+      pg: 8.23.1
+    transitivePeerDependencies:
+      - '@aws-sdk/client-rds-data'
+      - '@cloudflare/workers-types'
+      - '@effect/sql-d1'
+      - '@effect/sql-libsql'
+      - '@effect/sql-mysql2'
+      - '@effect/sql-pg'
+      - '@effect/sql-pglite'
+      - '@effect/sql-sqlite-bun'
+      - '@effect/sql-sqlite-do'
+      - '@effect/sql-sqlite-node'
+      - '@effect/sql-sqlite-wasm'
+      - '@electric-sql/pglite'
+      - '@libsql/client'
+      - '@libsql/client-wasm'
+      - '@neondatabase/serverless'
+      - '@op-engineering/op-sqlite'
+      - '@opentelemetry/api'
+      - '@planetscale/database'
+      - '@sinclair/typebox'
+      - '@sqlitecloud/drivers'
+      - '@tidbcloud/serverless'
+      - '@tursodatabase/database'
+      - '@tursodatabase/database-common'
+      - '@tursodatabase/database-wasm'
+      - '@tursodatabase/serverless'
+      - '@tursodatabase/sync'
+      - '@types/better-sqlite3'
+      - '@types/mssql'
+      - '@types/pg'
+      - '@types/sql.js'
+      - '@upstash/redis'
+      - '@vercel/postgres'
+      - '@xata.io/client'
+      - arktype
+      - better-sqlite3
+      - bun-types
+      - effect
+      - expo-sqlite
+      - mssql
+      - mysql2
+      - pg-native
+      - postgres
+      - sql.js
+      - sqlite3
+      - supports-color
+      - typebox
+      - valibot
+      - zod
+
   require-from-string@2.0.2: {}
 
   ret@0.5.1: {}
@@ -1879,12 +1944,13 @@ snapshots:
 
   statuses@2.0.2: {}
 
-  stellarium-ts@0.17.0(@opentelemetry/api@1.10.0):
+  stellarium-ts@0.19.0(@opentelemetry/api@1.10.0):
     dependencies:
       '@fastify/rate-limit': 11.2.1
       dotenv: 18.0.8
       fastify: 5.12.7
-      requestscript: 1.1.0(@opentelemetry/api@1.10.0)(sqlite3@6.0.1)
+      jose: 6.1.0
+      requestscript: 1.3.0(@opentelemetry/api@1.10.0)(sqlite3@6.0.1)
       sqlite: 5.1.1
       sqlite3: 6.0.1
     transitivePeerDependencies:

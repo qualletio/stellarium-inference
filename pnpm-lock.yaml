@@ -21,8 +21,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(@opentelemetry/api@1.10.0)(sqlite3@6.0.1)
       stellarium-ts:
-        specifier: ^0.19.0
-        version: 0.19.0(@opentelemetry/api@1.10.0)
+        specifier: ^0.19.1
+        version: 0.19.1(@opentelemetry/api@1.10.0)
     devDependencies:
       '@types/node':
         specifier: ^26.6.5
@@ -971,8 +971,8 @@ packages:
     resolution: {integrity: sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==}
     engines: {node: '>= 0.8'}
 
-  stellarium-ts@0.19.0:
-    resolution: {integrity: sha512-1KiLxf90N01TULrLLcZ7NKs9YQ7gILCnzZ2tFXLw2etv1mrdUbuJKHTC0wIS9w6e5qs94CT8ty7vX3xk/U0qNA==}
+  stellarium-ts@0.19.1:
+    resolution: {integrity: sha512-Vm6bbyI9JnpwWMSKu25A4/YPNNjU5fRgZsc2re+v9lh9rl2nB+VprFPhP+A55zx4Jj4oFCkKLvvkNzfsFMbyeQ==}
     engines: {node: '>=20'}
 
   string_decoder@1.3.0:
@@ -1944,7 +1944,7 @@ snapshots:
 
   statuses@2.0.2: {}
 
-  stellarium-ts@0.19.0(@opentelemetry/api@1.10.0):
+  stellarium-ts@0.19.1(@opentelemetry/api@1.10.0):
     dependencies:
       '@fastify/rate-limit': 11.2.1
       dotenv: 18.0.8

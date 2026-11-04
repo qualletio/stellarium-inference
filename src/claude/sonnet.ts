@@ -2,6 +2,8 @@ import Anthropic from "@anthropic-ai/sdk";
 import { ResourceFunctionCallParameter } from "requestscript";
 import type { StellariumResource } from "stellarium-ts";
 
+const client = new Anthropic();
+
 export function sonnet(baseUrl: string): StellariumResource {
   return {
     id: 1,
@@ -32,8 +34,6 @@ export function sonnet(baseUrl: string): StellariumResource {
         exec: async (args) => {
           const prompt = args.find((arg) => arg.name === "prompt")?.value;
           const maxTokens = args.find((arg) => arg.name === "maxTokens")?.value;
-          
-          const client = new Anthropic();
 
           const message = await client.messages.create({
               max_tokens: maxTokens as number,
@@ -53,8 +53,6 @@ export function sonnet(baseUrl: string): StellariumResource {
         },
         estimateInputTokens: async (args: ResourceFunctionCallParameter[]) => {
           const prompt = args.find((arg) => arg.name === "prompt")?.value as string;
-
-          const client = new Anthropic();
 
           const messageTokensCount = await client.messages.countTokens({
             messages: [{ content: prompt, role: "user" }],

@@ -53,8 +53,8 @@ export function jev(baseUrl: string): StellariumResource {
             description: "This argument is ignored for this model.",
           }
         ],
-        returnType: "string",
-        description: "Prompt the model to generate text.",
+        returnType: "object",
+        description: "Prompt the model to choose from a list of choices.",
         exec: async (args) => {
           
 

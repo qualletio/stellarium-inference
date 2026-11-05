@@ -1,5 +1,5 @@
 import { ResourceFunctionCallParameter } from "requestscript";
-import type { StellariumResource } from "stellarium-ts";
+import { defineStruct, type StellariumResource } from "stellarium-ts";
 import { choice, TypeSafeClient } from "@typesafe-ai/sdk";
 
 const client = new TypeSafeClient({ defaultModel: "jev-latest" }); // Reads TYPESAFE_API_KEY.
@@ -8,6 +8,17 @@ const client = new TypeSafeClient({ defaultModel: "jev-latest" }); // Reads TYPE
 // charge comes from the real usage, so it errs high.
 const CHARS_PER_TOKEN = 3;
 const REQUEST_OVERHEAD_TOKENS = 200; // Calibrate against response.usage.input_tokens.
+
+export const Choice = defineStruct("sh.stellarium.inference.typesafe.Choice", 1, {
+  name: "string",
+  value: "string",
+});
+
+export const JevChoiceInput = defineStruct("sh.stellarium.inference.typesafe.JevChoiceInput", 1, {
+  prompt: "string",
+  question: "string",
+  choices: `[]${Choice.type}`,
+});
 
 function estimateChoiceInputTokens(args: ResourceFunctionCallParameter[]): number {
   const prompt = args.find((arg) => arg.name === "prompt")?.value;
@@ -32,10 +43,10 @@ export function jev(baseUrl: string): StellariumResource {
         name: "choice",
         kind: "inference",
         parameters: [
-          { 
-            name: "prompt", 
-            type: "string", 
-            description: "The context to give the model to help it answer the question." 
+          {
+            name: "prompt",
+            type: "string",
+            description: "The context to give the model to help it answer the question."
           },
           {
             name: "question",
@@ -44,7 +55,7 @@ export function jev(baseUrl: string): StellariumResource {
           },
           {
             name: "choices",
-            type: "[]object",
+            type: `[]${Choice.type}`,
             description: "The choices to choose from. Must include a name and value property.",
           },
           {
@@ -53,10 +64,10 @@ export function jev(baseUrl: string): StellariumResource {
             description: "This argument is ignored for this model.",
           }
         ],
-        returnType: "object",
+        returnType: JevChoiceInput.type,
         description: "Prompt the model to choose from a list of choices.",
         exec: async (args) => {
-          
+
 
           const prompt = args.find((arg) => arg.name === "prompt")?.value as string;
           const question = args.find((arg) => arg.name === "question")?.value as string;
@@ -74,11 +85,11 @@ export function jev(baseUrl: string): StellariumResource {
             },
           });
 
-          return { 
-            value: { 
-              choice: response.answers.question.choice, 
-              confidence: response.answers.question.confidence 
-            }, 
+          return {
+            value: {
+              choice: response.answers.question.choice,
+              confidence: response.answers.question.confidence
+            },
             usage: {
               // Typesafe may not report usage; fall back to the estimate so the call still settles.
               inputTokens: response.usage.input_tokens ?? estimateChoiceInputTokens(args),
@@ -89,7 +100,7 @@ export function jev(baseUrl: string): StellariumResource {
         estimateInputTokens: async (args: ResourceFunctionCallParameter[]) => estimateChoiceInputTokens(args),
         paymentManifest: {
           // $0.042 per million tokens
-          inputCostMicroUsdPerMillionTokens: 42000,
+          inputCostMicroUsdPerMillionTokens: 43000,
           // $0 per million tokens
           outputCostMicroUsdPerMillionTokens: 0,
         },
